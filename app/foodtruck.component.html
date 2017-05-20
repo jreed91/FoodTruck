@@ -1,0 +1,24 @@
+<h2>My FoodTrucks</h2>
+<div>
+  <label>FoodTruck name:</label> <input #foodTruckName />
+  <button (click)="add(foodTruckName.value); foodTruckName.value=''">
+    Add
+  </button>
+</div>
+
+<ul class="foodtrucks">
+  <li *ngFor="let foodtruck of foodtrucks"
+    [class.selected]="foodtruck === selectedFoodTruck"
+    (click)="onSelect(foodtruck)">
+    <span class="badge">{{foodtruck.foodTruckId}}</span> {{foodtruck.name}}
+    <button class="delete"
+  (click)="delete(foodtruck); $event.stopPropagation()">x</button>
+  </li>
+</ul>
+<div *ngIf="selectedFoodTruck">
+  <h2>
+    {{selectedFoodTruck.name | uppercase}} is my hero {{selectedFoodTruck.foodTruckId}}
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
+
